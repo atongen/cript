@@ -72,13 +72,13 @@ Type `cript --help` after gem installation for usage.
 
 ## TODO
 
-[ ] plugable encryption
-[ ] gpg encryption
-[ ] plugable storage
-[ ] ssh storage
-[ ] s3 storage
-[ ] google drive storage
-[ ] drb storage
+- [ ] plugable encryption
+- [ ] gpg encryption
+- [ ] plugable storage
+- [ ] ssh storage
+- [ ] s3 storage
+- [ ] google drive storage
+- [ ] drb storage
 
 ## Contributing
 

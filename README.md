@@ -2,6 +2,7 @@
 
 Simple Encryption Tools for Ruby
 
+[![Gem Version](https://badge.fury.io/rb/cript.png)](http://badge.fury.io/rb/cript)
 [![Build Status](https://travis-ci.org/atongen/cript.png)](https://travis-ci.org/atongen/cript)
 
 ## Installation
@@ -69,25 +70,15 @@ encrypted = c.encrypt("More secret stuff!")
 You can use Cript::Simple from bash with the `cript` executable.
 Type `cript --help` after gem installation for usage.
 
-### Cript::Hidr
+## TODO
 
-The Hidr class allows you to obscure strings in other strings by facilitating a two-way conversion
-between a string and a binary version of that string.
-
-The resulting binary characters can be any two charaters. By default it uses a space and a tab.
-
-```ruby
-h = Cript::Hidr.new(b0: 'a', b1: 'z')
-result = h.hide('Wow!')
-```
-
-After running this code, result will contain "zzzazazazzzzazzazzzazzzazaaaazaa".
-
-It comes with a few commonly used mappings already setup: ascii, unicode, orly.
-Call the class method of the same name to get these hidrs.
-
-You can use Cript::Hidr from bash with the `hidr` executable.
-Type `hidr --help` after gem installation for usage.
+[ ] plugable encryption
+[ ] gpg encryption
+[ ] plugable storage
+[ ] ssh storage
+[ ] s3 storage
+[ ] google drive storage
+[ ] drb storage
 
 ## Contributing
 

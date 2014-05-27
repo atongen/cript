@@ -12,36 +12,36 @@ module Cript
 
     # Build a new cripter
     #
-    # Options:
+    # opts:
     # public_key_content
     # private_key_content
     # public_key_path
     # private_key_path
     # passphrase
-    def initialize(options = {})
-      @options = options
+    def initialize(opts = {})
+      @opts = opts
 
       # Attempt to use the private key at the default location
       # if exists and not otherwise specified
-      unless [:private_key_content, :private_key_path].any? { |o| @options[o] }
+      unless [:private_key_content, :private_key_path].any? { |o| @opts[o] }
         if File.file?("#{ENV['HOME']}/.ssh/id_rsa")
-          @options[:private_key_path] = "#{ENV['HOME']}/.ssh/id_rsa"
+          @opts[:private_key_path] = "#{ENV['HOME']}/.ssh/id_rsa"
         end
       end
 
-      if @options[:private_key_content]
-        @private_key = OpenSSL::PKey::RSA.new(*[@options[:private_key_content], @options.delete(:passphrase)])
-      elsif @options[:private_key_path] && File.file?(@options[:private_key_path])
-        @private_key = OpenSSL::PKey::RSA.new(*[File.read(@options[:private_key_path]), @options.delete(:passphrase)])
+      if @opts[:private_key_content]
+        @private_key = OpenSSL::PKey::RSA.new(*[@opts[:private_key_content], @opts.delete(:passphrase)])
+      elsif @opts[:private_key_path] && File.file?(@opts[:private_key_path])
+        @private_key = OpenSSL::PKey::RSA.new(*[File.read(@opts[:private_key_path]), @opts.delete(:passphrase)])
       end
 
       if @private_key
         @public_key = private_key.public_key
       else
-        if @options[:public_key_content]
-          @public_key = OpenSSL::PKey::RSA.new(@options[:public_key_content])
-        elsif @options[:public_key_path] && File.file?(@options[:public_key_path])
-          @public_key = OpenSSL::PKey::RSA.new(File.read(@options[:public_key_path]))
+        if @opts[:public_key_content]
+          @public_key = OpenSSL::PKey::RSA.new(@opts[:public_key_content])
+        elsif @opts[:public_key_path] && File.file?(@opts[:public_key_path])
+          @public_key = OpenSSL::PKey::RSA.new(File.read(@opts[:public_key_path]))
         elsif File.file?("#{ENV['HOME']}/.ssh/id_rsa.pub")
           @public_key = OpenSSL::PKey::RSA.new(File.read("#{ENV['HOME']}/.ssh/id_rsa.pub"))
         end

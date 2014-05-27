@@ -10,13 +10,17 @@ module Cript
     METHODS = Hash.new.methods - Object.new.methods
     KEY = :data
 
-    def initialize(file, options = {})
-      @store = Store.new(file, options)
+    def initialize(file, opts = {})
+      @store = Store.new(file, opts)
       @store.transaction do
         unless @store[KEY].is_a?(Hash)
           @store[KEY] = {}
         end
       end
+    end
+
+    def self.insecure(file, opts = {})
+      new(file, opts.merge({ private_key_content: INSECURE_PRIVATE_KEY }))
     end
 
     def inspect
@@ -31,8 +35,8 @@ module Cript
       end
     end
 
-    def respond_to?(sym)
-      METHODS.include?(sym)
+    def respond_to_missing?(sym, include_private = false)
+      METHODS.include?(sym) || super
     end
 
   end

@@ -17,12 +17,15 @@ module Cript
     #
     # passphrase
     # thread_safe
-    def initialize(file, options = {})
-      @opt = options
-      crypt_class = options.delete(:crypt_class) || Cript::Simple
-      @crypt = crypt_class.new(options)
-      thread_safe = !!options.delete(:thread_safe)
+    def initialize(file, opts = {})
+      @opt = opts
+      @cript = Cript::Simple.new(@opts)
+      thread_safe = !!@opts.delete(:thread_safe)
       super(file, thread_safe)
+    end
+
+    def self.insecure(file, opts = {})
+      new(file, opts.merge({ private_key_content: INSECURE_PRIVATE_KEY }))
     end
 
     def inspect
@@ -35,12 +38,12 @@ module Cript
 
     # encrypt
     def dump(table)
-      @crypt.encrypt(Marshal::dump(table))
+      @cript.encrypt(Marshal::dump(table))
     end
 
     # decrypt
     def load(content)
-      Marshal::load(@crypt.decrypt(content))
+      Marshal::load(@cript.decrypt(content))
     end
 
     def marshal_dump_supports_canonical_option?

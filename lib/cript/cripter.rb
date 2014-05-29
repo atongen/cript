@@ -36,7 +36,7 @@ module Cript
       end
 
       if @private_key
-        @public_key = private_key.public_key
+        @public_key = @private_key.public_key
       else
         if @options[:public_key_content]
           @public_key = OpenSSL::PKey::RSA.new(@options[:public_key_content])

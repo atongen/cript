@@ -18,7 +18,7 @@ module Cript
     # passphrase
     # thread_safe
     def initialize(file, opts = {})
-      @opt = opts
+      @opts = opts
       @cript = Cript::Simple.new(@opts)
       thread_safe = !!@opts.delete(:thread_safe)
       super(file, thread_safe)

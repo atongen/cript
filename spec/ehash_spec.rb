@@ -13,7 +13,7 @@ describe Cript::EHash do
   end
 
   it 'should encrypt and decrypt' do
-    e = Cript::EHash.new(file, private_key_content: Cript::PRIVATE_KEY, public_key_content: Cript::PUBLIC_KEY)
+    e = Cript::EHash.insecure(file)
     data = 10.times.inject({}) { |data,i| data[SecureRandom.hex] = SecureRandom.random_bytes(4096); data }
     data.keys.each do |key|
       e[key] = data[key]

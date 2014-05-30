@@ -45,13 +45,14 @@ Obviously, this will have performance implications.
 
 Cript::Simple is a simple wrapper around the ruby openssl bindings.
 Once created, you can call encrypt or decrypt on it to encrypt or decrypt strings.
-It requires access to an RSA public key to do encryption, and an RSA private key to do decryption.
-If not provided at initialization, it will look in $HOME/.ssh/id_rsa and $HOME/.ssh/id_rsa.pub.
+It requires access to an an RSA private key. It can use only a public key if you're
+doing one-way encryption.
+If not provided at initialization, it will look in $HOME/.ssh/id_rsa and/or $HOME/.ssh/id_rsa.pub.
 
 If you don't want to use your default ssh keys, you can pass in paths to a different key pair.
 
 ```ruby
-c1 = Cript::Simple.new(public_key_path: '/path/to/some/ssh_key.pub', private_key_path: '/path/to/some/ssh_key')
+c1 = Cript::Simple.new(private_key_path: '/path/to/some/ssh_key')
 plain = "More secret stuff!"
 encrypted = c2.encrypt(plain)
 decrypted = c2.decrypt(encrypted)
@@ -61,7 +62,6 @@ Or you can pass in the ssh keys as strings in PEM format:
 
 ```ruby
 c2 = Cript::Simple.new({
-  public_key_content: "-----BEGIN PUBLIC KEY-----\nafaf...",
   private_key_path: "-----BEGIN RSA PRIVATE KEY-----\n3f4q..."
 })
 encrypted = c.encrypt("More secret stuff!")
@@ -72,13 +72,7 @@ Type `cript --help` after gem installation for usage.
 
 ## TODO
 
-- [ ] plugable encryption
-- [ ] gpg encryption
-- [ ] plugable storage
-- [ ] ssh storage
-- [ ] s3 storage
-- [ ] google drive storage
-- [ ] drb storage
+- [ ] gpg encryption option
 
 ## Contributing
 

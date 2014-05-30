@@ -1,11 +1,10 @@
 require 'spec_helper'
+require 'cript/naive'
 
 describe Cript::Naive do
   let(:naive) do
     Cript::Simple.new({
-      private_key_content: Cript::PRIVATE_KEY,
-      public_key_content: Cript::PUBLIC_KEY,
-      size: Cript::KEY_SIZE
+      private_key_content: Cript::INSECURE_PRIVATE_KEY
     })
   end
   let(:small_data) { SecureRandom.random_bytes }

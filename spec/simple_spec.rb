@@ -3,8 +3,7 @@ require 'spec_helper'
 describe Cript::Simple do
   let(:simple) do
     Cript::Simple.new({
-      private_key_content: Cript::PRIVATE_KEY,
-      public_key_content: Cript::PUBLIC_KEY
+      private_key_content: Cript::INSECURE_PRIVATE_KEY
     })
   end
   let(:small_data) { SecureRandom.random_bytes }

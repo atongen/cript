@@ -62,7 +62,7 @@ Or you can pass in the ssh keys as strings in PEM format:
 
 ```ruby
 c2 = Cript::Simple.new({
-  private_key_path: "-----BEGIN RSA PRIVATE KEY-----\n3f4q..."
+  private_key_content: "-----BEGIN RSA PRIVATE KEY-----\n3f4q..."
 })
 encrypted = c.encrypt("More secret stuff!")
 ```
